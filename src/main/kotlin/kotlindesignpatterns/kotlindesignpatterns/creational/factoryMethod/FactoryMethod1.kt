@@ -16,6 +16,7 @@ class ShippDelivery : DeliveryType {
 }
 
 fun main(args: Array<String>) {
+    // Violates: SRP, OCP, DI, SLAP
     val typeOfDelivery = "truck"
 
     val deliveryType = when(typeOfDelivery) {
