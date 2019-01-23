@@ -1,18 +1,24 @@
 package kotlindesignpatterns.kotlindesignpatterns.creational.factoryMethod
 
-import java.lang.RuntimeException
-import java.math.BigDecimal
-
-interface DeliveryType {
-    fun calculate(value: BigDecimal): BigDecimal
+interface Transport {
+    fun deliver()
 }
 
-class TruckDelivery : DeliveryType {
-    override fun calculate(value: BigDecimal): BigDecimal = value.times(0.2.toBigDecimal())
+abstract class Logistics {
+    fun planDelivery() {
+        val transport = createTransport()
+        transport.deliver()
+    }
+
+    abstract fun createTransport(): Transport
 }
 
-class ShippDelivery : DeliveryType {
-    override fun calculate(value: BigDecimal): BigDecimal = value.times(0.1.toBigDecimal())
+class RoadLogistics : Logistics(), Transport {
+    override fun createTransport(): Transport = RoadLogistics()
+
+    override fun deliver() {
+        println("Deliverying by road")
+    }
 }
 
 fun main(args: Array<String>) {
